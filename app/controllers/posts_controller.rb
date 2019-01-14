@@ -1,15 +1,23 @@
 class PostsController < ApplicationController
-  def index
+    def index
     @posts = Post.all
-  end
+    end
 
-  def show
+    def show
     @post = Post.find(params[:id])
-  end
+    end
 
-  def new
+    def new
     @post = Post.new
-  end
+    end
 
-  # add create method here
+    def create
+        @post = Post.new
+        @post.title = params[:title]
+        @post.description = params[:description]
+        @post.save
+        redirect_to post_path(@post)
+        # OR #
+        # redirect_to @post
+    end
 end
